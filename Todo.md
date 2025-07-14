@@ -61,9 +61,9 @@ A complete roadmap for building a task management app with **Next.js, PostgreSQL
 ### Backend
 
 - [ ] Team API routes:
-  - [ ] `POST /api/teams` (create team)
-  - [ ] `POST /api/teams/invite` (email invites)
-- [ ] Role-based access control (Admin/Member)
+  - [x] `POST /api/teams` (create team)
+  - [x] `POST /api/teams/invite` (email invites)
+- [x] Role-based access control (Admin/Member)
 
 ### Frontend
 

@@ -12,14 +12,14 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async signIn(params) {
-      console.log("Sign in callback:", params);
+    async signIn({ user }) {
+      console.log("Sign in callback:", user);
       try {
         await prisma.user.create({
           data: {
-            email: params.user.email || "",
-            name: params.user.name || "",
-            image: params.user.image || "",
+            email: user.email || "",
+            name: user.name || "",
+            image: user.image || "",
           },
         });
       } catch (error) {

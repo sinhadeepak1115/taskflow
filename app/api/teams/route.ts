@@ -9,7 +9,18 @@ const teamSchema = zod.object({
   description: zod.string().optional(),
 });
 
-export async function GET() {}
+export async function GET() {
+  try {
+    const teams = await prisma.team.findMany();
+    return NextResponse.json(teams, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching teams:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch teams" },
+      { status: 500 },
+    );
+  }
+}
 
 export async function POST(req: Request) {
   const parsedTeam = teamSchema.safeParse(await req.json());

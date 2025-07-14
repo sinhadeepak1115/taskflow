@@ -18,6 +18,12 @@ enum Role {
   ADMIN
 }
 
+enum MailStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
 enum TaskStatus {
   TODO
   IN_PROGRESS
@@ -31,21 +37,22 @@ enum Priority {
 }
 
 model User {
-  id       String  @id @default(cuid())
-  email    String  @unique
-  name     String?
-  image    String?
+  id    String  @id @default(cuid())
+  email String  @unique
+  name  String?
+  image String?
 
   // Relations
   tasks      Task[]
   TeamMember TeamMember[]
+  Invitation Invitation[]
 }
 
 model Task {
   id          String     @id @default(cuid())
   title       String
   description String?
-  status       TaskStatus @default(TODO)
+  status      TaskStatus @default(TODO)
   priority    Priority   @default(MEDIUM)
   dueDate     DateTime?
   createdAt   DateTime   @default(now())
@@ -68,6 +75,7 @@ model Team {
   // Relations
   TeamMember TeamMember[]
   tasks      Task[]
+  Invitation Invitation[]
 }
 
 model TeamMember {
@@ -84,4 +92,18 @@ model TeamMember {
   // Relations
 
   @@unique([userId, teamId])
+}
+
+model Invitation {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  status    String   @default("PENDING")
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  team     Team   @relation(fields: [teamId], references: [id])
+  teamId   String
+  sender   User?  @relation(fields: [senderId], references: [id])
+  senderId String
 }
