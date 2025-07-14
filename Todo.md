@@ -7,14 +7,14 @@ A complete roadmap for building a task management app with **Next.js, PostgreSQL
 ## 🏗️ **Phase 1: Project Setup & Basic Structure**
 
 - [x] Initialize Next.js (TypeScript template)
-- [ ] Set up ESLint + Prettier
-- [ ] Configure PostgreSQL + Prisma
-  - [ ] Define `schema.prisma` (User, Task, Team models)
-  - [ ] Seed initial data
+- [x] add Nextauth
+- [x] Configure PostgreSQL + Prisma
+  - [x] Define `schema.prisma` (User, Task, Team models)
+  - [x] Seed initial data
 - [ ] Set up Redux Toolkit
   - [ ] Create store with `persistReducer`
   - [ ] Add auth/task/team slices
-- [ ] UI Framework (TailwindCSS/MUI)
+- [x] UI Framework (TailwindCSS/MUI)
   - [ ] Layout (Sidebar, Header, Main Content)
 
 ---
@@ -28,7 +28,6 @@ A complete roadmap for building a task management app with **Next.js, PostgreSQL
   - [ ] `POST /api/auth/login`
   - [ ] `POST /api/auth/refresh` (JWT refresh)
   - [ ] `POST /api/auth/logout`
-- [ ] Password hashing (bcrypt)
 - [ ] Email verification (Nodemailer)
 
 ### Frontend
@@ -44,8 +43,8 @@ A complete roadmap for building a task management app with **Next.js, PostgreSQL
 ### Backend
 
 - [ ] Task API routes:
-  - [ ] `GET /api/tasks` (filter by status/assignee)
-  - [ ] `POST /api/tasks`
+  - [x] `GET /api/tasks` (filter by status/assignee)
+  - [x] `POST /api/tasks`
   - [ ] `PUT /api/tasks/:id`
   - [ ] `DELETE /api/tasks/:id`
 
