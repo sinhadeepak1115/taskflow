@@ -45,8 +45,8 @@ A complete roadmap for building a task management app with **Next.js, PostgreSQL
 - [ ] Task API routes:
   - [x] `GET /api/tasks` (filter by status/assignee)
   - [x] `POST /api/tasks`
-  - [ ] `PUT /api/tasks/:id`
-  - [ ] `DELETE /api/tasks/:id`
+  - [x] `PUT /api/tasks/:id`
+  - [x] `DELETE /api/tasks/:id`
 
 ### Frontend
 
