@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sendMail } from "@/lib/mail";
-import { getServerSession } from "next-auth";
 import { generateToken } from "@/lib/token";
 import { PrismaClient } from "@prisma/client";
 
@@ -46,3 +45,5 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+//TODO: Make joinin page for joing the team

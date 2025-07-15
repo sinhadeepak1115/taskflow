@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import zod from "zod";
 import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
 
 const prisma = new PrismaClient();
 
@@ -11,6 +13,11 @@ const teamSchema = zod.object({
 
 export async function GET() {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    console.log("Session:", session);
     const teams = await prisma.team.findMany();
     return NextResponse.json(teams, { status: 200 });
   } catch (error) {
