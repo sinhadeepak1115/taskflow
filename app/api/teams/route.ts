@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import zod from "zod";
 import { PrismaClient } from "@prisma/client";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/lib/auth";
 
 const prisma = new PrismaClient();
 
@@ -13,11 +11,6 @@ const teamSchema = zod.object({
 
 export async function GET() {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    console.log("Session:", session);
     const teams = await prisma.team.findMany();
     return NextResponse.json(teams, { status: 200 });
   } catch (error) {
@@ -30,19 +23,24 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  const parsedTeam = teamSchema.safeParse(await req.json());
-  if (!parsedTeam.success) {
-    return NextResponse.json(
-      { errors: parsedTeam.error.issues },
-      { status: 400 },
-    );
-  }
   try {
+    const parsedTeam = teamSchema.safeParse(await req.json());
+    if (!parsedTeam.success) {
+      return NextResponse.json(
+        { errors: parsedTeam.error.issues },
+        { status: 400 },
+      );
+    }
+
     const task = await prisma.team.create({
       data: parsedTeam.data,
     });
     return NextResponse.json(task, { status: 201 });
   } catch (error) {
     console.error("Error creating team:", error);
+    return NextResponse.json(
+      { error: "Failed to create team" },
+      { status: 500 },
+    );
   }
 }

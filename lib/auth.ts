@@ -40,7 +40,6 @@ export const authOptions: NextAuthOptions = {
         if (dbUser) {
           session.user.id = dbUser.id;
         }
-        console.log("Session callback:", session);
       }
       return session;
     },
